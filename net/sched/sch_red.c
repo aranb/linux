@@ -62,9 +62,10 @@ static int red_enqueue(struct sk_buff *skb, struct Qdisc *sch)
 	struct Qdisc *child = q->qdisc;
 	int ret;
 
-	q->vars.qavg = red_calc_qavg(&q->parms,
-				     &q->vars,
-				     child->qstats.backlog);
+	q->vars.qavg = child->qstats.backlog;
+//	q->vars.qavg = red_calc_qavg(&q->parms,
+//				     &q->vars,
+//				     child->qstats.backlog);
 
 	if (red_is_idling(&q->vars))
 		red_end_of_idle_period(&q->vars);
