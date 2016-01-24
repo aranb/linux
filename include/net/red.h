@@ -174,8 +174,10 @@ static inline void red_set_parms(struct red_parms *p,
 	int delta = qth_max - qth_min;
 	u32 max_p_delta;
 
-	p->qth_min	= qth_min << Wlog;
-	p->qth_max	= qth_max << Wlog;
+	p->qth_min	= qth_min;
+	p->qth_max	= qth_max;
+//	p->qth_min	= qth_min << Wlog;
+//	p->qth_max	= qth_max << Wlog;
 	p->Wlog		= Wlog;
 	p->Plog		= Plog;
 	if (delta < 0)
@@ -295,6 +297,7 @@ static inline unsigned long red_calc_qavg(const struct red_parms *p,
 					  const struct red_vars *v,
 					  unsigned int backlog)
 {
+	return backlog;
 	if (!red_is_idling(v))
 		return red_calc_qavg_no_idle_time(p, v, backlog);
 	else
